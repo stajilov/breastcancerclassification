@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template,request, jsonify
 #scientific computing library for saving, reading, and resizing images
 from scipy.misc import imsave, imread, imresize
 #for matrix math
@@ -21,6 +21,7 @@ app = Flask(__name__)
 #model, graph = init()
 from sklearn.externals import joblib
 
+import json
 
 model_file_name = 'breast_prediction.pkl'
 labels_file_name = 'labels.pkl'
@@ -39,23 +40,44 @@ def index():
 	#render out pre-built HTML file right on the index page
 	return render_template("index.html")
 
-@app.route('/predict/',methods=['GET','POST'])
+@app.route('/predict/',methods=['POST'])
 def predict():
-    model, labels = load_model_and_labels()
-    response = 1
 
+    if request.method=='POST':
+        model, labels = load_model_and_labels()
+        request_dictionary = request.form.to_dict()
+        print(request_dictionary)
+        values = list(request_dictionary.values())
     
+        float_vals = [(float(x) if x else 0) for x in values]
 
-    email = request.form.get('email')
-    name = request.form.get('name')
-    print(email, name)
-    return email	
+        print(float_vals)
+        new_vector = np.array(float_vals).reshape(1, -1)
+        predicted_values = model.predict(new_vector)
+        precicted = np.array2string(predicted_values).replace("[",  '').replace("]",  '')
+        print(type(precicted))
+        labels['predicted_diagnosis'] = precicted
+        
+
+        new_dict = {}
+        for k in labels.keys():
+            new_dict[str(k)] = labels[k]
+        
+        
+        #print(new_dict)
+        
+        jsonStr = json.dumps(new_dict)
+        print(jsonStr)
+        return jsonStr
+    #else:
+    #    return "Hello"
+
 	
 
 if __name__ == "__main__":
 	#decide what port to run the app in
-	port = int(os.environ.get('PORT', 5000))
+	port = int(os.environ.get('PORT', 9090))
 	#run the app locally on the givn port
-	app.run(host='0.0.0.0', port=port)
+	app.run(host='127.0.0.1', port=port)
 	#optional if we want to run in debugging mode
 	app.run(debug=True)

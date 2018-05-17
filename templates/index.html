@@ -8,32 +8,196 @@
     <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+	
  
 </head>
 <body>
-<div class="row">
-<div class="col-sm-6 col-sm-offset-3">
+
+
+<div class="col-sm-6 col-sm-offset-3" id="fields">
     <h3>Breast cancer classification - Malignant or Belign</h3>
     <form role="form" id="fieldsForm">
 			<div class="row">
-					<div class="form-group col-sm-6">
-						<label for="name" class="h4">Radius mean</label>
-						<input type="text" class="form-control" id="name" placeholder="Enter Radius Mean:">
+					<div class="form-group col-sm-4">
+						<label for="radius_mean" class="h4">Radius mean</label>
+						<input type="number" step="any" class="form-control" id="radius_mean" placeholder="Enter Radius mean:">
 					</div>
-					<div class="form-group col-sm-6">
-						<label for="email" class="h4">Texture mean</label>
-						<input type="text" class="form-control" id="email" placeholder="Texture mean">
+					<div class="form-group col-sm-4">
+						<label for="texture_mean" class="h4">Texture mean</label>
+						<input type="number" step="any" class="form-control" id="texture_mean" placeholder="Texture mean">
 					</div>
+
+					<div class="form-group col-sm-4">
+						<label for="perimeter_mean" class="h4">Perimeter mean</label>
+						<input type="number" step="any" class="form-control" id="perimeter_mean" placeholder="Perimiter mean">
+					</div>
+					
+			</div>
+
+			<div class="row">
+				<div class="form-group col-sm-4">
+					<label for="area_mean" class="h4">Area mean</label>
+					<input type="number" step="any" class="form-control" id="area_mean" placeholder="Area Mean:">
 				</div>
-				<div class="form-group">
-					<label for="message" class="h4 ">Perimeter Mean</label>
-					<input id="message" class="form-control" placeholder="Perimeter Mean<" required></textarea>
+				<div class="form-group col-sm-4">
+					<label for="smoothness_mean" class="h4">Smoothness mean</label>
+					<input type="number" step="any" class="form-control" id="smoothness_mean" placeholder="Smoothness mean">
 				</div>
-				<button type="submit" id="form-submit" class="btn btn-success btn-lg pull-right ">Submit</button>
-		<div id="msgSubmit" class="h3 text-center hidden">Wait....</div>
+
+				<div class="form-group col-sm-4">
+					<label for="compactness_mean" class="h4">Compactness Mean</label>
+					<input type="number" step="any" class="form-control" id="compactness_mean" placeholder="Compactness Mean">
+				</div>
+				
+			</div>
+
+
+			<div class="row">
+				<div class="form-group col-sm-4">
+					<label for="concavity_mean" class="h4">Concavity mean</label>
+					<input type="number" step="any" class="form-control" id="concavity_mean" placeholder="Concavity mean">
+				</div>
+				<div class="form-group col-sm-4">
+					<label for="concave_points_mean" class="h4">Texture mean</label>
+					<input type="number" step="any" class="form-control" id="concave_points_mean" placeholder="Concave points mean">
+				</div>
+
+				<div class="form-group col-sm-4">
+					<label for="symmetry_mean" class="h4">Symmetry mean</label>
+					<input type="number" step="any" class="form-control" id="symmetry_mean" placeholder="Symmenty Mean:">
+				</div>
+				
+			</div>
+
+			<div class="row">
+				<div class="form-group col-sm-4">
+					<label for="fractal_dimension_mean" class="h4">Fractal Dimension Mean</label>
+					<input type="number" step="any" class="form-control" id="fractal_dimension_mean" placeholder="Fractal Dimension Mean">
+				</div>
+				<div class="form-group col-sm-4">
+					<label for="radius_se" class="h4">Radius SE</label>
+					<input type="number" step="any" class="form-control" id="radius_se" placeholder="Radius SE">
+				</div>
+
+				<div class="form-group col-sm-4">
+					<label for="texture_se" class="h4">Texture SE</label>
+					<input type="number" step="any" class="form-control" id="texture_se" placeholder="Texture SE">
+				</div>
+				
+			</div>
+
+			<div class="row">
+				<div class="form-group col-sm-4">
+					<label for="perimeter_se" class="h4">Perimeter SE</label>
+					<input type="number" step="any" class="form-control" id="perimeter_se" placeholder="Perimeter SE">
+				</div>
+				<div class="form-group col-sm-4">
+					<label for="area_se" class="h4">Area SE</label>
+					<input type="number" step="any" class="form-control" id="area_se" placeholder="Area SE">
+				</div>
+
+				<div class="form-group col-sm-4">
+					<label for="smoothness_se" class="h4">Smootheness SE</label>
+					<input type="number" step="any" class="form-control" id="smoothness_se" placeholder="Smootheness SE">
+				</div>
+				
+			</div>
+
+			<div class="row">
+				<div class="form-group col-sm-4">
+					<label for="compactness_se" class="h4">Compactness SE</label>
+					<input type="number" step="any" class="form-control" id="compactness_se" placeholder="Compactness SE">
+				</div>
+				<div class="form-group col-sm-4">
+					<label for="concavity_se" class="h4">Concavity SE</label>
+					<input type="number" step="any" class="form-control" id="concavity_se" placeholder="Concavity SE">
+				</div>
+
+				<div class="form-group col-sm-4">
+					<label for="concave_points_se" class="h4">Concave Points SE</label>
+					<input type="number" step="any" class="form-control" id="concave_points_se" placeholder="Concave Points SE">
+				</div>
+				
+			</div>
+
+			<div class="row">
+				<div class="form-group col-sm-4">
+					<label for="symmetry_se" class="h4">Symmetry SE</label>
+					<input type="number" step="any" class="form-control" id="symmetry_se" placeholder="Symmetry SE">
+				</div>
+				<div class="form-group col-sm-4">
+					<label for="fractal_dimension_se" class="h4">Fractal Dimention SE</label>
+					<input type="number" step="any" class="form-control" id="fractal_dimension_se" placeholder="Fractal Dimention SE">
+				</div>
+
+				<div class="form-group col-sm-4">
+					<label for="radius_worst" class="h4">Radius Worst</label>
+					<input type="number" step="any" class="form-control" id="radius_worst" placeholder="Radius worst">
+				</div>
+				
+			</div>
+
+			<div class="row">
+				<div class="form-group col-sm-4">
+					<label for="texture_worst" class="h4">Texture worst</label>
+					<input type="number" step="any" class="form-control" id="texture_worst" placeholder="Texture worst">
+				</div>
+				<div class="form-group col-sm-4">
+					<label for="perimeter_worst" class="h4">Perimiter worst</label>
+					<input type="number" step="any" class="form-control" id="perimeter_worst" placeholder="Perimiter worst">
+				</div>
+
+				<div class="form-group col-sm-4">
+					<label for="area_worst" class="h4">Area Worst</label>
+					<input type="number" step="any" class="form-control" id="area_worst" placeholder="Area Worst">
+				</div>
+				
+			</div>
+
+			<div class="row">
+				<div class="form-group col-sm-4">
+					<label for="smoothness_worst" class="h4">Smoothness worst</label>
+					<input type="number" step="any" class="form-control" id="smoothness_worst" placeholder="Smoothness worst">
+				</div>
+				<div class="form-group col-sm-4">
+					<label for="compactness_worst" class="h4">Compactness worst</label>
+					<input type="number" step="any" class="form-control" id="compactness_worst" placeholder="Compactness worst">
+				</div>
+
+				<div class="form-group col-sm-4">
+						<label for="concavity_worst" class="h4">Concativity worst</label>
+						<input type="number" step="any" class="form-control" id="concavity_worst" placeholder="Concativity worst">
+					</div>
+
+				
+			</div>
+
+			<div class="row">
+
+					<div class="form-group col-sm-4">
+							<label for="concave_points_worst" class="h4">Concave points worst</label>
+							<input type="number" step="any" class="form-control" id="concave_points_worst" placeholder="Concave points worst">
+						</div>
+
+					<div class="form-group col-sm-4">
+							<label for="symmetry_worst" class="h4">Symmetry worst</label>
+							<input type="number" step="any" class="form-control" id="symmetry_worst" placeholder="Symmetry worst">
+						</div>
+				<div class="form-group col-sm-4">
+					<label for="fractal_dimension_worst" class="h4">Fractal Dimention Worst</label>
+					<input type="number" step="any" class="form-control" id="fractal_dimension_worst" placeholder="Fractal Dim Worst">
+				</div>
+				
+			</div>
+
+
+
+
+				
+			<button type="submit" id="form-submit" class="btn btn-success btn-lg pull-right ">Submit</button>	
      
-    </form>
-</div>
+	</form>
+	<div id="msgSubmit" class="h3 text-center">Wait....</div>
 </div>
 </body>
 
@@ -44,32 +208,77 @@
 
 
   <script>
- $("#fieldsForm").submit(function(event){
-	 console.log("submitting...")
+
+	var frm = $('#fieldsForm');
+	frm.submit(function(event) {
+	console.log("submitting...")
     // cancels the form submission
 	//event.preventDefault();
 	
 	var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-    var name = $("#name").val();
-    var email = $("#email").val();
-    var message = $("#message").val();
+    
+	
+
+	var radius_mean = $("#radius_mean").val();
+	var texture_mean = $("#texture_mean").val();
+	var perimeter_mean = $("#perimeter_mean").val();
+	var area_mean = $("#area_mean").val();
+	var smoothness_mean = $("#smoothness_mean").val();
+	var compactness_mean = $("#compactness_mean").val();
+	var concavity_mean = $("#concavity_mean").val();
+	var concave_points_mean = $("#concave_points_mean").val();
+	var symmetry_mean = $("#symmetry_mean").val();
+	var fractal_dimension_mean = $("#fractal_dimension_mean").val();
+	var radius_se = $("#radius_se").val();
+	var texture_se = $("#texture_se").val();
+	var perimeter_se = $("#perimeter_se").val();
+	var area_se = $("#area_se").val();
+	var smoothness_se = $("#smoothness_se").val();
+	var compactness_se = $("#compactness_se").val();
+	var concavity_se = $("#concavity_se").val();
+	var concave_points_se = $("#concave_points_se").val();
+	var symmetry_se = $("#symmetry_se").val();
+	var fractal_dimension_se = $("#fractal_dimension_se").val();
+	var radius_worst = $("#radius_worst").val();
+	var texture_worst = $("#texture_worst").val();
+	var perimeter_worst = $("#perimeter_worst").val();
+	var area_worst = $("#area_worst").val();
+	var smoothness_worst = $("#smoothness_worst").val();
+	var compactness_worst = $("#compactness_worst").val();
+	var concavity_worst = $("#concavity_worst").val();
+	var concave_points_worst = $("#concave_points_worst").val();
+	var symmetry_worst = $("#symmetry_worst").val();
+	var fractal_dimension_worst = $("#fractal_dimension_worst").val();
  
+	var ur = $SCRIPT_ROOT + "/predict/";
+	//$SCRIPT_ROOT
     $.ajax({
         type: "POST",
-        url: $SCRIPT_ROOT + "/predict/",
-        data: "name=" + name + "&email=" + email + "&message=" + message,
-        success : function(txt){
-			console.log(txt);
-            $( "#msgSubmit" ).removeClass( "hidden" );
-			$("#msgSubmit").text(txt)
+		url:  ur,
+		contentType: "application/x-www-form-urlencoded",
+        data: "radius_mean=" + radius_mean +"&texture_mean=" + texture_mean +"&perimeter_mean=" + perimeter_mean +"&area_mean=" + area_mean +"&smoothness_mean=" + smoothness_mean +"&compactness_mean=" + compactness_mean +"&concavity_mean=" + concavity_mean +"&concave_points_mean=" + concave_points_mean +"&symmetry_mean=" + symmetry_mean +"&fractal_dimension_mean=" + fractal_dimension_mean +"&radius_se=" + radius_se +"&texture_se=" + texture_se +"&perimeter_se=" + perimeter_se +"&area_se=" + area_se +"&smoothness_se=" + smoothness_se +"&compactness_se=" + compactness_se +"&concavity_se=" + concavity_se +"&concave_points_se=" + concave_points_se +"&symmetry_se=" + symmetry_se +"&fractal_dimension_se=" + fractal_dimension_se +"&radius_worst=" + radius_worst +"&texture_worst=" + texture_worst +"&perimeter_worst=" + perimeter_worst +"&area_worst=" + area_worst +"&smoothness_worst=" + smoothness_worst +"&compactness_worst=" + compactness_worst +"&concavity_worst=" + concavity_worst +"&concave_points_worst=" + concave_points_worst +"&symmetry_worst=" + symmetry_worst +"&fractal_dimension_worst=" + fractal_dimension_worst,
+        success : function(data) {
+			if(data) {  
+				$( "#msgSubmit" ).removeClass( "hidden" );
+				$("#msgSubmit").text(data);
+				
+				Console.log(data)  ; 
+            	$('#msgSubmit').txt(data);
+        		} else { 
+					Console.log("No response...")   ; 
+				}
+
+				
+			
+            //$( "#msgSubmit" ).removeClass( "hidden" );
+			//$("#msgSubmit").text(data)
         }
-    });
-    
-});
+	});
+	
+	return false;
+	
+	});
 
-
-
-  </script>
 
 
 
