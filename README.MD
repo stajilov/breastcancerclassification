@@ -1,4 +1,4 @@
-# Breast Cancer Classification - Malignant or Benign
+#Breast Cancer Classification - Malignant or Benign
 
 
 Trained on the following data
@@ -18,8 +18,4 @@ Although in the example above it was used with LSTM, the usage of the regulizer,
 1. Run python3 diganosis_classic.py - to train with classical Machine Learning Method
 2. Run python3 app.py - to Run as a web service
 ```
-
-TODO
-- Finish handling all inputs into the model
-- Deploy to as a service
 
