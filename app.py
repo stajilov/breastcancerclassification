@@ -1,6 +1,5 @@
 from flask import Flask, render_template,request, jsonify
-#scientific computing library for saving, reading, and resizing images
-from scipy.misc import imsave, imread, imresize
+
 #for matrix math
 import numpy as np
 #for importing our keras model
