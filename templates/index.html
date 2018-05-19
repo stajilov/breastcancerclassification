@@ -11,11 +11,47 @@
 	
  
 </head>
+
+<nav class="navbar">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="https://cyberwhale.tech/">
+				<img class="img-responsive" style="max-width:100px; margin-top: -7px;" src="{{ url_for('static',filename='cw_logo_small.png') }}">
+			</a>
+		</div>
+	</nav>
+
 <body>
 
 
+			
+<div class="col-sm-6 col-sm-offset-3">
+		<h3 class="text-center">Breast cancer classification - Malignant or Belign</h3>
+		Trained on the following
+		<a href="https://data.world/health/breast-cancer-wisconsin/workspace/file?filename=DatasetDescription.txt">breast cancer data</a>
+		
+</br>
+		The model uses classic and modern Machine Learning algorithms and the best classifier is AdaBoost (97-99%).
+	</br>
+		Random Forest trees and Gradient Boosting work fine as well with precition of <b>>94-97%. </b>
+	</br>
+	</br>
+		To our surprise, classical MLP classifier in keras performed much worse than other non-DL ML algorithms, giving just 60% precition
+		The only way to boost MLP sequential classifier was to use One Shot Learning add-on.
+		<a href="https://github.com/sorenbouma/keras-oneshot">Keras one shot learning</a>
+		Although in the example above it was used with LSTM, the usage of the regulizer, resulted in 30% precition increase for our case.
+	</br>
+	</br>
+	Disclaimer!
+	The decision is machine generated, so it's might not be realistic. It's rather data/evidence based than research/inspection based.
+	</br>
+
+	Check the code on <a href="https://github.com/stajilov">Github</a>
+
+</div>
+
+
 <div class="col-sm-6 col-sm-offset-3" id="fields">
-    <h3>Breast cancer classification - Malignant or Belign</h3>
+    
     <form role="form" id="fieldsForm">
 			<div class="row">
 					<div class="form-group col-sm-4">
@@ -126,8 +162,8 @@
 					<input type="number" step="any" class="form-control" id="symmetry_se" placeholder="Symmetry SE">
 				</div>
 				<div class="form-group col-sm-4">
-					<label for="fractal_dimension_se" class="h4">Fractal Dimention SE</label>
-					<input type="number" step="any" class="form-control" id="fractal_dimension_se" placeholder="Fractal Dimention SE">
+					<label for="fractal_dimension_se" class="h4">Fractal Dim SE</label>
+					<input type="number" step="any" class="form-control" id="fractal_dimension_se" placeholder="Fractal Dim SE">
 				</div>
 
 				<div class="form-group col-sm-4">
@@ -184,7 +220,7 @@
 							<input type="number" step="any" class="form-control" id="symmetry_worst" placeholder="Symmetry worst">
 						</div>
 				<div class="form-group col-sm-4">
-					<label for="fractal_dimension_worst" class="h4">Fractal Dimention Worst</label>
+					<label for="fractal_dimension_worst" class="h4">Fractal Dim Worst</label>
 					<input type="number" step="any" class="form-control" id="fractal_dimension_worst" placeholder="Fractal Dim Worst">
 				</div>
 				
@@ -197,8 +233,16 @@
 			<button type="submit" id="form-submit" class="btn btn-success btn-lg pull-right ">Submit</button>	
      
 	</form>
-	<div id="msgSubmit" class="h3 text-center">Wait....</div>
+	<div id="dianosisPredicted" class="h3 text-center hidden">Results: </div>
+	<div id="legend" class="h3 text-center">Legend:
+		M - Malignant;
+		B - Belign
+	</div>
+	
 </div>
+
+
+
 </body>
 
   
@@ -259,17 +303,22 @@
         data: "radius_mean=" + radius_mean +"&texture_mean=" + texture_mean +"&perimeter_mean=" + perimeter_mean +"&area_mean=" + area_mean +"&smoothness_mean=" + smoothness_mean +"&compactness_mean=" + compactness_mean +"&concavity_mean=" + concavity_mean +"&concave_points_mean=" + concave_points_mean +"&symmetry_mean=" + symmetry_mean +"&fractal_dimension_mean=" + fractal_dimension_mean +"&radius_se=" + radius_se +"&texture_se=" + texture_se +"&perimeter_se=" + perimeter_se +"&area_se=" + area_se +"&smoothness_se=" + smoothness_se +"&compactness_se=" + compactness_se +"&concavity_se=" + concavity_se +"&concave_points_se=" + concave_points_se +"&symmetry_se=" + symmetry_se +"&fractal_dimension_se=" + fractal_dimension_se +"&radius_worst=" + radius_worst +"&texture_worst=" + texture_worst +"&perimeter_worst=" + perimeter_worst +"&area_worst=" + area_worst +"&smoothness_worst=" + smoothness_worst +"&compactness_worst=" + compactness_worst +"&concavity_worst=" + concavity_worst +"&concave_points_worst=" + concave_points_worst +"&symmetry_worst=" + symmetry_worst +"&fractal_dimension_worst=" + fractal_dimension_worst,
         success : function(data) {
 			if(data) {  
-				$( "#msgSubmit" ).removeClass( "hidden" );
-				$("#msgSubmit").text(data);
-				
-				Console.log(data)  ; 
-            	$('#msgSubmit').txt(data);
-        		} else { 
-					Console.log("No response...")   ; 
-				}
+				$( "#dianosisPredicted" ).removeClass( "hidden" );
+
+				var json_obj = $.parseJSON(data);
+
+				var predicted = json_obj['predicted_diagnosis'];
+				var dianosisSymbol = json_obj[predicted]
+
+				var output_text = "Predicted: " + dianosisSymbol;
+				$("#dianosisPredicted").text(output_text);
+
 
 				
-			
+            	//$('#msgSubmit').txt(data);
+        		} else { 
+					Console.log("No response...")   ; 
+			}
             //$( "#msgSubmit" ).removeClass( "hidden" );
 			//$("#msgSubmit").text(data)
         }
